@@ -1,0 +1,8 @@
+{
+  "name": "til-engine",
+  "version": "1.0.0",
+  "description": "Static site generator for TIL (Things I Learned) notes",
+  "scripts": {
+    "build": "node build.js"
+  }
+}

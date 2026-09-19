@@ -18,12 +18,20 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
+      - name: Checkout cross-repo content
+        uses: actions/checkout@v4
+        with:
+          repository: lancer1977/til
+          path: content-src
+
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
           node-version: '18'
 
       - name: Build
+        env:
+          TIL_CONTENT_DIR: content-src/content
         run: npm run build
 
       - name: Configure Pages

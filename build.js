@@ -761,7 +761,15 @@ function build() {
   fs.mkdirSync(path.join(distDir, 'notes'), { recursive: true });
 
   // Read all markdown files
-  const contentDir = path.join(__dirname, 'content');
+  // TIL_CONTENT_DIR can be set via environment variable; defaults to ./content
+  let contentDir;
+  if (process.env.TIL_CONTENT_DIR) {
+    contentDir = path.isAbsolute(process.env.TIL_CONTENT_DIR)
+      ? process.env.TIL_CONTENT_DIR
+      : path.join(__dirname, process.env.TIL_CONTENT_DIR);
+  } else {
+    contentDir = path.join(__dirname, 'content');
+  }
   const mdFiles = getAllMarkdownFiles(contentDir);
 
   console.log(`Found ${mdFiles.length} markdown files`);
